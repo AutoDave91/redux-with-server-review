@@ -1,6 +1,8 @@
 import React from 'react';
-import store, {UPDATE_BODY} from '../redux/store';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+
+import store, {UPDATE_BODY} from '../redux/store';
 
 export default function Step2(props) {
   function handleChange(e) {
@@ -9,6 +11,9 @@ export default function Step2(props) {
       payload: e.target.value
     });
   }
+  const reduxSalutation = store.getState().salutation;
+  const reduxBody = store.getState().body;
+
   return (
     <div>
       <button onClick={() => props.history.goBack()}>Back</button>
@@ -16,7 +21,7 @@ export default function Step2(props) {
       <textarea
         onChange={handleChange} 
       />
-      <Link to='/results'>
+      <Link to='/results' onClick={()=>axios.post('/api/letters', {reduxSalutation, reduxBody})}>
         <button>See Results</button>
       </Link>
     </div>

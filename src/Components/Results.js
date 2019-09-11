@@ -1,6 +1,7 @@
 import React from 'react';
 import store from '../redux/store';
 import {Link} from 'react-router-dom';
+import Axios from 'axios';
 
 export default class Results extends React.Component {
   constructor() {
@@ -11,13 +12,13 @@ export default class Results extends React.Component {
     }
   }
   componentDidMount() {
-    const reduxSalutation = store.getState().salutation;
-    const reduxBody = store.getState().body;
 
-    this.setState({
-      salutation: reduxSalutation,
-      body: reduxBody
-    })
+    Axios.get('/api/letters').then( response =>
+      this.setState({
+        salutation: response.data.salutation,
+        body: response.data.body
+      })
+    )
   }
   render() {
     return (
