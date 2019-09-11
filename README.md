@@ -1,2 +1,3 @@
-# 2019-09-10_pm-review
-Created with CodeSandbox
+## Redux practice in React
+
+Today's review helped to reinforce how to set redux state and get from redux state.
